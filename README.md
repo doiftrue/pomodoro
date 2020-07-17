@@ -29,7 +29,10 @@ Drop pomodoro.php into `wp-content/mu-plugins` and enjoy the added speed :)
 
 The more plugins you have the better the performance gains.
 
-You can use `POMODORO_CACHE_DIR` constant to change cache directory (needs full path).
+You can use `WP_TEMP_DIR` constant to change cache directory (needs full path). Example for `wp-config.php`:
+```php
+define( 'WP_TEMP_DIR', dirname( $_SERVER['DOCUMENT_ROOT'] ) . "/tmp" );
+```
 
 ## Support
 
