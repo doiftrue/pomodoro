@@ -151,7 +151,7 @@ class MoCache_Translation {
 	 * Cache key calculator.
 	 */
 	private function cache_key( $args ) {
-		return md5( serialize( array( $args, $this->domain ) ) );
+		return md5( implode( '', $args ) . $this->domain );
 	}
 }
 
