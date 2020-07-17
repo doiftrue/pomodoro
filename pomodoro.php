@@ -29,12 +29,12 @@ class MoCache_Translation {
 	/**
 	 * Private state.
 	 */
-	private $domain = null;
-	private $cache = array();
-	private $busted = false;
+	private $domain   = null;
+	private $cache    = array();
+	private $busted   = false;
 	private $override = null;
 	private $upstream = null;
-	private $mofile = null;
+	private $mofile   = null;
 
 	/**
 	 * Construct the main translation cache instance for a domain.
@@ -44,15 +44,13 @@ class MoCache_Translation {
 	 * @param Translations $merge The class in the same domain, we have overriden it.
 	 */
 	public function __construct( $mofile, $domain, $override ) {
-		$this->mofile = apply_filters( 'load_textdomain_mofile', $mofile, $domain );
-		$this->domain = $domain;
+		
+		$this->mofile   = apply_filters( 'load_textdomain_mofile', $mofile, $domain );
+		$this->domain   = $domain;
 		$this->override = $override;
-		$temp_dir = get_temp_dir();
-
-		$filename = md5( serialize( array( get_home_url(), $this->domain, $this->mofile ) ) );
-		if ( defined( 'POMODORO_CACHE_DIR' ) && POMODORO_CACHE_DIR && wp_mkdir_p( POMODORO_CACHE_DIR ) ) {
-			$temp_dir = POMODORO_CACHE_DIR;
-		}
+		
+		$temp_dir   = get_temp_dir();
+		$filename   = md5( serialize( array( get_home_url(), $this->domain, $this->mofile ) ) );
 		$cache_file = sprintf( '%s/%s.mocache', untrailingslashit( $temp_dir ), $filename );
 
 		$mtime = filemtime( $this->mofile );
@@ -74,7 +72,7 @@ class MoCache_Translation {
 			}
 		}
 
-		$_this = &$this;
+		$_this = & $this;
 
 		register_shutdown_function( function() use ( $cache_file, $_this, $mtime ) {
 			/**
